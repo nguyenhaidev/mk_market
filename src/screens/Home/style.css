@@ -6,7 +6,7 @@
 .label-text{
     margin-top: 20px;
     font-weight: 650;
-    font-size: 3vh;
+    font-size: 150%;
     text-decoration: none;
     color: black;
 }
@@ -19,7 +19,7 @@
 .btn-category{
     background-color: #1a1a74;
     color: white;
-    font-size: 2vh;
+    font-size: 100%;
     font-weight: 550;
     border: solid 2px #1a1a74;
     border-radius: 5px;
@@ -68,7 +68,6 @@
     bottom:  0;
     transition: 1s;
     position: absolute;
-    transition: 1s;
     background-color: rgba(26, 26, 116);
     left: 0;
     border-radius:  0px 0px 5px 5px;
@@ -95,3 +94,4 @@
     background-color: rgb(201, 201, 201);
     color: rgba(26, 26, 116);
 }
+

@@ -43,10 +43,10 @@ function Home(props) {
           Danh mục sản phẩm
         </div>
         <div className="row mx-0 mt-2">
-          {categories.map((cat) => {
+          {categories.map((cat, index) => {
             return (
-              <div className="px-2 col-md btn">
-                <div key={cat} className="my-2 py-3 btn-category">
+              <div key={index} className="px-2 col-md btn">
+                <div className="my-2 py-3 btn-category">
                   {`${cat[0].toUpperCase()}${cat.slice(1)}`}
                 </div>
               </div>
@@ -61,9 +61,9 @@ function Home(props) {
           </a>
         </div>
         <div className="row mx-0 mt-2">
-          {hotItems.map((item) => {
+          {hotItems.map((item, index) => {
             return (
-              <div key={item.id} className="col-6 col-lg-4 col-xl-3">
+              <div key={index} className="col-6 col-lg-4 col-xl-3">
                 <Item data={item} />
               </div>
             );
