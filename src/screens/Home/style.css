@@ -4,11 +4,15 @@
 }
 
 .label-text{
-    margin-top: 20px;
+    margin-top: 10px;
     font-weight: 650;
     font-size: 150%;
     text-decoration: none;
     color: black;
+}
+
+.home__label-btn{
+    text-decoration: none;
 }
 
 .label-text:hover{
@@ -93,5 +97,23 @@
 .item__btn:hover{
     background-color: rgb(201, 201, 201);
     color: rgba(26, 26, 116);
+}
+
+.supplier__label{
+    font-size: 150%;
+    font-weight: 650;
+    overflow: hidden;
+}
+
+.supplier__label::before{    margin: 0 15px 0 -100%;}
+.supplier__label::after{    margin: 0 -100% 0 15px}
+
+.supplier__label::before , .supplier__label::after{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    border-top: 1px solid;
+    border-top-color: inherit;
 }
 

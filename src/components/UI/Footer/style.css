@@ -22,6 +22,10 @@
     border: solid 2px rgb(114, 114, 114);
 }
 
+.footer__input-group:focus-within{
+    border: solid 2px rgba(26, 26, 116);
+}
+
 .footer__input{
     width: 100%;
     border: none; 
@@ -54,8 +58,4 @@
 .footer_input-btn:hover{
     color: white;
     background-color: rgba(26, 26, 116,0.9);
-}
-
-.footer__input-group + .footer__input:focus  {
-    border: solid 2px rgba(26, 26, 116) !important;
 }

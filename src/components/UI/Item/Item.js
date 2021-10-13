@@ -4,7 +4,7 @@ import NumberFormat from "react-number-format";
 
 function Item(props) {
   return (
-    <div className="w-100 mx-2 my-2 row home-item justify-content-center">
+    <div className="w-100 mx-0 my-2 row home-item justify-content-center">
       <div className="row flex-column flex-md-row d-flex">
         <div className="col-md-5">
           <img

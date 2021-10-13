@@ -36,7 +36,6 @@ const NavBar = (props) => {
       default:
         setCurrent(0);
     }
-    console.log(isActive);
   });
 
   const toggle = () => setIsOpen(!isOpen);
@@ -83,15 +82,6 @@ const NavBar = (props) => {
               Liên hệ
             </NavLink>
           </NavItem>
-          {/* <UncontrolledDropdown nav inNavbar>
-            <DropdownToggle nav>Options</DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>Option 1</DropdownItem>
-              <DropdownItem>Option 2</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Reset</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown> */}
         </Nav>
         <Nav className="ms-auto" navbar>
           <UncontrolledDropdown nav inNavbar>
@@ -109,11 +99,13 @@ const NavBar = (props) => {
             <DropdownToggle nav>
               <i className="far fa-user mx-1"></i>
             </DropdownToggle>
-            <DropdownMenu right>
-              <DropdownItem>Option 1</DropdownItem>
-              <DropdownItem>Option 2</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Reset</DropdownItem>
+            <DropdownMenu right className="py-0" style={{ overflow: "hidden" }}>
+              <DropdownItem>
+                <p className="text-center my-1">Đăng nhập</p>
+              </DropdownItem>
+              <DropdownItem>
+                <p className="text-center my-1">Đăng ký</p>
+              </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>

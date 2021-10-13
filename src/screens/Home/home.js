@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-// import PropTypes from "prop-types";
 
+import Swipers from "../../components/UI/Swiper/Swipers";
 import Caruosels from "../../components/UI/Carousel/Carousel";
 import Item from "../../components/UI/Item/Item";
 
@@ -13,6 +13,8 @@ import "./style.css";
 function Home(props) {
   const [categories, setCategories] = useState([]);
   const [hotItems, setHotItems] = useState([]);
+  const [electronics, setElectronics] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const items = [{ src: banner1 }, { src: banner2 }, { src: banner3 }];
 
@@ -22,6 +24,21 @@ function Home(props) {
       url: "https://fakestoreapi.com/products/categories",
     }).then((res) => {
       setCategories(res.data);
+    });
+
+    axios({
+      method: "get",
+      url: "https://randomuser.me/api/?results=4",
+    }).then((res) => {
+      // console.log(res.data);
+      setUsers(res.data.results);
+    });
+
+    axios({
+      method: "get",
+      url: "https://fakestoreapi.com/products/category/electronics",
+    }).then((res) => {
+      setElectronics(res.data);
     });
 
     axios({
@@ -39,8 +56,8 @@ function Home(props) {
         <Caruosels items={items} />
       </div>
       <section id="category" className="mt-5">
-        <div className="text-center label-text border-bottom pb-3">
-          Danh mục sản phẩm
+        <div className="text-center border-bottom pb-3">
+          <span className="label-text">Danh mục sản phẩm</span>
         </div>
         <div className="row mx-0 mt-2">
           {categories.map((cat, index) => {
@@ -56,8 +73,8 @@ function Home(props) {
       </section>
       <section id="category" className="mt-5">
         <div className="border-bottom pb-3 mx-0 row">
-          <a href="/products" className=" label-text pb-2 btn-link">
-            Sản phẩm HOT
+          <a href="/hots" className=" pb-2 home__label-btn">
+            <span className="label-text">Sản phẩm HOT</span>
           </a>
         </div>
         <div className="row mx-0 mt-2">
@@ -70,10 +87,34 @@ function Home(props) {
           })}
         </div>
       </section>
+      <section id="electronics" className="mt-5">
+        <div className="border-bottom pb-3 mx-0 row">
+          <a href="/electronics" className=" pb-2 home__label-btn">
+            <span className="label-text">Đồ điện tử</span>
+          </a>
+        </div>
+        <div className="w-100 px-2">
+          <Swipers data={electronics} />
+        </div>
+      </section>
+      <section id="supplier" className="mt-5">
+        <div className=" pb-3 mx-0 row">
+          <span className="supplier__label text-center">
+            Nhà phân phối chính thức
+          </span>
+        </div>
+        <div className="w-100 px-2 d-flex">
+          {users.map((user, index) => {
+            return (
+              <div key={index} className="w-25">
+                {user.cell}
+              </div>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }
-
-Home.propTypes = {};
 
 export default Home;
