@@ -27,7 +27,7 @@ const NavBar = (props) => {
       case "/":
         setCurrent(0);
         break;
-      case "/store":
+      case "/categories":
         setCurrent(1);
         break;
       case "/info":
@@ -68,7 +68,7 @@ const NavBar = (props) => {
           </NavItem>
           <NavItem>
             <NavLink
-              href="/store"
+              href="/categories"
               className={isActive === 1 ? "nav-link-active" : ""}
             >
               Cửa hàng

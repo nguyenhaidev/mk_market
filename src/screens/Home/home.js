@@ -14,6 +14,7 @@ function Home(props) {
   const [categories, setCategories] = useState([]);
   const [hotItems, setHotItems] = useState([]);
   const [electronics, setElectronics] = useState([]);
+  const [women, setWomen] = useState([]);
   const [users, setUsers] = useState([]);
 
   const items = [{ src: banner1 }, { src: banner2 }, { src: banner3 }];
@@ -39,6 +40,13 @@ function Home(props) {
       url: "https://fakestoreapi.com/products/category/electronics",
     }).then((res) => {
       setElectronics(res.data);
+    });
+
+    axios({
+      method: "get",
+      url: "https://fakestoreapi.com/products/category/women's clothing",
+    }).then((res) => {
+      setWomen(res.data);
     });
 
     axios({
@@ -89,12 +97,28 @@ function Home(props) {
       </section>
       <section id="electronics" className="mt-5">
         <div className="border-bottom pb-3 mx-0 row">
-          <a href="/electronics" className=" pb-2 home__label-btn">
+          <a
+            href="/categories?cat=electronics"
+            className=" pb-2 home__label-btn"
+          >
             <span className="label-text">Đồ điện tử</span>
           </a>
         </div>
         <div className="w-100 px-2">
           <Swipers data={electronics} />
+        </div>
+      </section>
+      <section id="women'sClothing" className="mt-5">
+        <div className="border-bottom pb-3 mx-0 row">
+          <a
+            href="/categories?cat=women's clothing"
+            className=" pb-2 home__label-btn"
+          >
+            <span className="label-text">Quần áo nữ</span>
+          </a>
+        </div>
+        <div className="w-100 px-2">
+          <Swipers data={women} />
         </div>
       </section>
       <section id="supplier" className="mt-5">
@@ -103,11 +127,35 @@ function Home(props) {
             Nhà phân phối chính thức
           </span>
         </div>
-        <div className="w-100 px-2 d-flex">
+        <div className="w-100 px-2 row mt-2">
           {users.map((user, index) => {
             return (
-              <div key={index} className="w-25">
-                {user.cell}
+              <div key={index} className="col-sm col-md-4 col-lg-3 text-center">
+                {console.log(user)}
+                <div className="w-100">
+                  <img
+                    src={user.picture.large}
+                    className="card-img-top p-2 rounded-circle"
+                    style={{ height: "75%", width: "75%" }}
+                    alt={
+                      user.name.title +
+                      ". " +
+                      user.name.first +
+                      " " +
+                      user.name.last
+                    }
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      {user.name.title +
+                        ". " +
+                        user.name.first +
+                        " " +
+                        user.name.last}
+                    </h5>
+                    <p className="card-text">{user.email}</p>
+                  </div>
+                </div>
               </div>
             );
           })}
