@@ -3,7 +3,7 @@ import "./style.css";
 
 const Footer = (props) => {
   return (
-    <div id="footer" className="w-100 row mx-0 mt-3">
+    <div id="footer" className="w-100 row flex-column-reverse flex-md-row mx-0 mt-3">
       <div className="col-md-4 d-flex align-items-start justify-content-center">
         <div className="d-flex align-items-center justify-content-center">
           <div

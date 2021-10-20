@@ -9,6 +9,8 @@ import banner1 from "../../images/GMMK_Compact.png";
 import banner2 from "../../images/GMMK_Lifestyle.png";
 import banner3 from "../../images/GMMK_Pro.png";
 import "./style.css";
+import categoryApi from "../../api/categoryApi";
+import productApi from "../../api/productApi";
 
 function Home(props) {
   const [categories, setCategories] = useState([]);
@@ -16,46 +18,66 @@ function Home(props) {
   const [electronics, setElectronics] = useState([]);
   const [women, setWomen] = useState([]);
   const [users, setUsers] = useState([]);
+  // const [error, setError] = useState([]);
+
+  // const toggleLoading = () => setLoading(!loading);
 
   const items = [{ src: banner1 }, { src: banner2 }, { src: banner3 }];
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "https://fakestoreapi.com/products/categories",
-    }).then((res) => {
-      setCategories(res.data);
-    });
 
-    axios({
-      method: "get",
-      url: "https://randomuser.me/api/?results=4",
-    }).then((res) => {
-      // console.log(res.data);
-      setUsers(res.data.results);
-    });
+    //Get all category
+    const getAllCategory = async () => {
+      try {
+        const res = await categoryApi.getAll();
+        setCategories(res);
+      } catch (error) {
+        // //handle error
+        // setError(error);
+      }
+    }
 
-    axios({
-      method: "get",
-      url: "https://fakestoreapi.com/products/category/electronics",
-    }).then((res) => {
-      setElectronics(res.data);
-    });
+    //Get 4 random user's infomation
+    const getRamdomUser = async () => {
+      try {
+        const res = await axios({
+          method: "get",
+          url: "https://randomuser.me/api/?results=4",
+        })
+        setUsers(res.data.results);
+      } catch (error) {
+        // //handle error
+        // setError(error);
+      }
+    }
 
-    axios({
-      method: "get",
-      url: "https://fakestoreapi.com/products/category/women's clothing",
-    }).then((res) => {
-      setWomen(res.data);
-    });
+    //Get products in category
+    const getProductsInCat = async (cat, setData) => {
+      try {
+        const res = await productApi.getInCat(`${cat}`);
+        setData(res);
+      } catch (error) {
+        // //handle error
+        // setError(error);
+      }
+    }
 
-    axios({
-      method: "get",
-      url: "https://fakestoreapi.com/products",
-      params: { limit: 8 },
-    }).then((res) => {
-      setHotItems(res.data);
-    });
+    //Get poducts base on input
+    const getSomeItems = async (limit = 8) => {
+      try {
+        const res = await productApi.getAll({ limit });
+        setHotItems(res);
+      } catch (error) {
+        // //handle error
+        // setError(error);
+      }
+    }
+
+    getProductsInCat('electronics', setElectronics);
+    getProductsInCat(`women's clothing`, setWomen);
+    getRamdomUser();
+    getAllCategory();
+    getSomeItems(8)
   }, []);
 
   return (
@@ -131,7 +153,6 @@ function Home(props) {
           {users.map((user, index) => {
             return (
               <div key={index} className="col-sm col-md-4 col-lg-3 text-center">
-                {console.log(user)}
                 <div className="w-100">
                   <img
                     src={user.picture.large}
