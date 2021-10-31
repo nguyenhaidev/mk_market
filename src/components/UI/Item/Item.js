@@ -1,9 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
+import "./style.module.scss";
+import style from './style.module.scss'
 
 function Item(props) {
-  return (
+  return props.rowStyle ? (
+    <div className={`w-100 d-flex align-items-center ${style.item__row} mx-0`} >
+      <div className="col-4 text-center">
+        <img
+          src={props.data.image}
+          alt={props.data.title}
+        />
+      </div>
+      <div className="col w-100 ps-3 row">
+        <div className=" d-flex flex-column justify-content-center">
+          <p className={`${style.title}`}>{props.data.title}</p>
+          <p className={``}>
+            Giá:
+            <NumberFormat
+              value={props.data.price * 23000}
+              displayType={"text"}
+              thousandSeparator={true}
+              className="mx-1"
+            />
+            Đồng
+          </p>
+        </div> 
+        <div className="d-flex">
+          <button className={`${style.btn}`}>Đặt hàng</button>
+        </div>
+      </div>
+    </div>
+  ) : (
     <div className="w-100 mx-0 my-2 row home-item justify-content-center">
       <div className="row flex-column flex-md-row d-flex">
         <div className="col-md-5">
@@ -42,6 +71,10 @@ function Item(props) {
     </div>
   );
 }
+
+Item.defaultProps = {
+  rowStyle: true,
+};
 
 Item.propTypes = {
   data: PropTypes.object.isRequired,

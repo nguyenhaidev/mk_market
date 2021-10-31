@@ -11,7 +11,7 @@ function Swipers(props) {
   const slide = props.data.map((item, index) => {
     return (
       <SwiperSlide key={index}>
-        <Item data={item} />
+        <Item data={item} rowStyle={false}/>
       </SwiperSlide>
     );
   });

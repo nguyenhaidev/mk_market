@@ -1,0 +1,42 @@
+.item__row {
+  height: 300px;
+  margin: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  .title{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    color: #1a1a74;
+  }
+
+  div {
+    img {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      padding-inline: 5%;
+      max-height: 300px;
+      max-width: 200px;
+      object-fit: contain;
+    }
+  }
+
+  .btn{
+      background-color: #1a1a74;
+      padding-inline: 20px;
+      color: white;
+      font-size: 24px;
+      border-radius: 1000px;
+      padding-block: 5px;
+  }
+
+  .btn:active{
+      background-color: #ffffff;
+  }
+}
+
+.item__row:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

@@ -9,7 +9,8 @@ const productApi = {
     },
 
     getInCat: (cat, params={}) => {
-        const url = `products/category/${cat}`;
+        const url = cat===""? "/products/"
+        : `/products/category/${cat}`;
         return axiosClient.get(url, {
             params
         })

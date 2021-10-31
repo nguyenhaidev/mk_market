@@ -3,10 +3,10 @@
     background-color: white;
     border: none;
     font-weight: 600;
-    padding-block: 1rem;
-    padding-inline: 1rem;
+    padding: 1rem;
     transition: 300ms;
     text-align: start;
+    padding-left: 20px;
 }
 
 .products__category-active{
