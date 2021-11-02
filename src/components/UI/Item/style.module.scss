@@ -4,7 +4,7 @@
   border-radius: 8px;
   cursor: pointer;
 
-  .title{
+  .title {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -23,20 +23,32 @@
     }
   }
 
-  .btn{
-      background-color: #1a1a74;
-      padding-inline: 20px;
-      color: white;
-      font-size: 24px;
-      border-radius: 1000px;
-      padding-block: 5px;
+  .btn {
+    background-color: #1a1a74;
+    padding-inline: 20px;
+    color: white;
+    font-size: 24px;
+    border-radius: 1000px;
+    padding-block: 5px;
   }
 
-  .btn:active{
-      background-color: #ffffff;
+  .btn:active {
+    background-color: #ffffff;
   }
 }
 
 .item__row:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
