@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import productApi from "../../api/productApi";
 // import PropTypes from "prop-types";
 
-import "./style.module.scss";
 import style from "./style.module.scss";
 
 function Detail(props) {
@@ -11,12 +10,14 @@ function Detail(props) {
   const [count, setCount] = useState(1);
 
   const changeCount = (val) => {
-    if (count <= 10) {
+    if (count < 10) {
       if (count > 1) {
         setCount(count + val);
       } else if (val > 0) {
         setCount(count + val);
       }
+    } else if (count === 10 && val < 0) {
+      setCount(count + val);
     }
   };
 
@@ -43,34 +44,40 @@ function Detail(props) {
 
   useEffect(() => {
     const id = getIdFromParam();
-    getProductDetail({ id });
+    getProductDetail({
+      id,
+    });
     return () => {
       setProduct([]);
     };
   }, []);
 
   return (
-    <div style={{ minHeight: window.innerHeight }}>
+    <div
+      style={{
+        minHeight: window.innerHeight,
+      }}
+    >
       <nav className={`breadcrumb ${style.breadcrumb__detail}`}>
         <ol className="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="/">Trang chủ</a>
-          </li>
+            <a href="/"> Trang chủ </a>{" "}
+          </li>{" "}
           <li class="breadcrumb-item ">
-            <a
-              href={`/categories?cat=${product.category}`}
-            >{`${product.category}`}</a>
-          </li>
-          <li class="breadcrumb-item">{product.title}</li>
-        </ol>
-      </nav>
+            <a href={`/categories?cat=${product.category}`}>
+              {" "}
+              {`${product.category}`}{" "}
+            </a>{" "}
+          </li>{" "}
+          <li class="breadcrumb-item active"> {product.title} </li>{" "}
+        </ol>{" "}
+      </nav>{" "}
       <div
         style={{
           minHeight: window.innerHeight,
         }}
         className={`row mx-0 align-items-center justify-content-center`}
       >
-        {" "}
         {loading ? (
           <div
             className="w-100 px-0 row mx-0"
@@ -80,13 +87,17 @@ function Detail(props) {
           >
             <div className="row mx-0">
               <div className="col-md-5 d-flex justify-content-center">
-                <img src={product.image} alt={product.image} />
-              </div>
+                <img src={product.image} alt={product.image} />{" "}
+              </div>{" "}
               <div className="col-md d-flex flex-column">
-                <h5 className="">{product.title}</h5>
-                <p style={{ color: `rgba(0,0,0,0.5)` }}>
-                  Mã sản phẩm: {product.id}
-                </p>
+                <h5 className=""> {product.title} </h5>{" "}
+                <p
+                  style={{
+                    color: `rgba(0,0,0,0.5)`,
+                  }}
+                >
+                  Mã sản phẩm: {product.id}{" "}
+                </p>{" "}
                 <div className="detail__btn-count input-group">
                   <button
                     class="btn btn-outline-secondary"
@@ -95,13 +106,13 @@ function Detail(props) {
                   >
                     -
                   </button>
-
                   <input
                     type="number"
                     name="count"
                     value={count}
                     onChange={(e) => setCount(e.value)}
                     className="input-group-text"
+                    style={{ width: "25%" }}
                   />
                   <button
                     class="btn btn-outline-secondary"
@@ -109,10 +120,18 @@ function Detail(props) {
                     onClick={() => changeCount(1)}
                   >
                     +
-                  </button>
+                  </button>{" "}
                 </div>
-              </div>
-            </div>
+                <div className="mt-2">
+                  <div className="my-2">
+                    <button className={style.add + ` me-md-2 me-0`}>
+                      Thêm vào giỏ hàng
+                    </button>
+                  </div>
+                  <button className={style.add}>Mua ngay</button>
+                </div>
+              </div>{" "}
+            </div>{" "}
           </div>
         ) : (
           <div
@@ -123,8 +142,8 @@ function Detail(props) {
               width: window.innerHeight / 5,
             }}
           ></div>
-        )}
-      </div>
+        )}{" "}
+      </div>{" "}
     </div>
   );
 }
