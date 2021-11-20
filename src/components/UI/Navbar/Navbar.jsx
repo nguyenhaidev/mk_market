@@ -84,7 +84,7 @@ const NavBar = (props) => {
           </NavItem>
         </Nav>
         <Nav className="ms-auto" navbar>
-          <UncontrolledDropdown nav inNavbar>
+          {/* <UncontrolledDropdown nav inNavbar>
             <DropdownToggle nav>
               <i className="fas fa-shopping-basket mx-1"></i>
             </DropdownToggle>
@@ -107,7 +107,7 @@ const NavBar = (props) => {
                 <p className="text-center my-1">Đăng ký</p>
               </DropdownItem>
             </DropdownMenu>
-          </UncontrolledDropdown>
+          </UncontrolledDropdown> */}
         </Nav>
       </Collapse>
     </Navbar>
