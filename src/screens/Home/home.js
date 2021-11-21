@@ -23,7 +23,17 @@ function Home(props) {
   const history = useHistory();
   // const [error, setError] = useState([]);
 
-  const items = [{ src: banner1 }, { src: banner2 }, { src: banner3 }];
+  const items = [
+    {
+      src: banner1,
+    },
+    {
+      src: banner2,
+    },
+    {
+      src: banner3,
+    },
+  ];
 
   //Get all category
   const getAllCategory = async () => {
@@ -44,9 +54,9 @@ function Home(props) {
     try {
       const res = await axios({
         method: "get",
-        url: "https://randomuser.me/api/?results=4",
+        url: "https://random-data-api.com/api/crypto_coin/random_crypto_coin?size=4",
       });
-      setUsers(res.data.results);
+      setUsers(res.data);
       setTimeout(() => {
         setLoading(true);
       }, process.env.REACT_APP_TIMEOUT);
@@ -73,7 +83,9 @@ function Home(props) {
   //Get poducts base on input
   const getSomeItems = async (limit = 8) => {
     try {
-      const res = await productApi.getAll({ limit });
+      const res = await productApi.getAll({
+        limit,
+      });
       setHotItems(res);
       setTimeout(() => {
         setLoading(true);
@@ -91,19 +103,22 @@ function Home(props) {
 
   return (
     <div
-      style={{ minHeight: window.innerHeight }}
+      style={{
+        minHeight: window.innerHeight,
+      }}
       className={`row mx-0 align-items-center justify-content-center`}
     >
       {loading ? (
         <div>
           <div id="banner">
-            <Caruosels items={items} />
-          </div>
+            <Caruosels items={items} />{" "}
+          </div>{" "}
           <section id="category" className="mt-5">
             <div className="text-center border-bottom pb-3">
-              <span className="label-text">Danh mục sản phẩm</span>
-            </div>
+              <span className="label-text"> Danh mục sản phẩm </span>{" "}
+            </div>{" "}
             <div className="row mx-0 mt-2">
+              {" "}
               {categories.map((cat, index) => {
                 return (
                   <div
@@ -114,62 +129,65 @@ function Home(props) {
                     }
                   >
                     <div className="my-2 py-3 btn-category">
-                      {`${cat[0].toUpperCase()}${cat.slice(1)}`}
-                    </div>
+                      {" "}
+                      {`${cat[0].toUpperCase()}${cat.slice(1)}`}{" "}
+                    </div>{" "}
                   </div>
                 );
-              })}
-            </div>
-          </section>
+              })}{" "}
+            </div>{" "}
+          </section>{" "}
           <section id="category" className="mt-5">
             <div className="border-bottom pb-3 mx-0 row">
               <a href="/hots" className=" pb-2 home__label-btn">
-                <span className="label-text">Sản phẩm HOT</span>
-              </a>
-            </div>
+                <span className="label-text"> Sản phẩm HOT </span>{" "}
+              </a>{" "}
+            </div>{" "}
             <div className="row mx-0 mt-2">
+              {" "}
               {hotItems.map((item, index) => {
                 return (
                   <div key={index} className="col-6 col-lg-4 col-xl-3">
-                    <Item data={item} rowStyle={false} />
+                    <Item data={item} rowStyle={false} />{" "}
                   </div>
                 );
-              })}
-            </div>
-          </section>
+              })}{" "}
+            </div>{" "}
+          </section>{" "}
           <section id="electronics" className="mt-5">
             <div className="border-bottom pb-3 mx-0 row">
               <a
                 href="/categories?cat=electronics"
                 className=" pb-2 home__label-btn"
               >
-                <span className="label-text">Đồ điện tử</span>
-              </a>
-            </div>
+                <span className="label-text"> Đồ điện tử </span>{" "}
+              </a>{" "}
+            </div>{" "}
             <div className="w-100 px-2">
-              <Swipers data={electronics} />
-            </div>
-          </section>
+              <Swipers data={electronics} />{" "}
+            </div>{" "}
+          </section>{" "}
           <section id="women'sClothing" className="mt-5">
             <div className="border-bottom pb-3 mx-0 row">
               <a
                 href="/categories?cat=women's clothing"
                 className=" pb-2 home__label-btn"
               >
-                <span className="label-text">Quần áo nữ</span>
-              </a>
-            </div>
+                <span className="label-text"> Quần áo nữ </span>{" "}
+              </a>{" "}
+            </div>{" "}
             <div className="w-100 px-2">
-              <Swipers data={women} />
-            </div>
-          </section>
+              <Swipers data={women} />{" "}
+            </div>{" "}
+          </section>{" "}
           <section id="supplier" className="mt-5">
             <div className=" pb-3 mx-0 row">
               <span className="supplier__label text-center">
-                Nhà phân phối chính thức
-              </span>
-            </div>
-            <div className="w-100 px-2 row mt-2">
+                Nhà phân phối chính thức{" "}
+              </span>{" "}
+            </div>{" "}
+            <div className="w-100 px-2 row mt-2 align-items-center">
+              {" "}
               {users.map((user, index) => {
                 return (
                   <div
@@ -178,33 +196,24 @@ function Home(props) {
                   >
                     <div className="w-100">
                       <img
-                        src={user.picture.large}
+                        src={user.logo}
                         className="card-img-top p-2 rounded-circle"
-                        style={{ height: "75%", width: "75%" }}
-                        alt={
-                          user.name.title +
-                          ". " +
-                          user.name.first +
-                          " " +
-                          user.name.last
-                        }
-                      />
+                        style={{
+                          height: window.innerWidth / 8,
+                          width: window.innerWidth / 8,
+                        }}
+                        alt={user.coin_name}
+                      />{" "}
                       <div className="card-body">
-                        <h5 className="card-title">
-                          {user.name.title +
-                            ". " +
-                            user.name.first +
-                            " " +
-                            user.name.last}
-                        </h5>
-                        <p className="card-text">{user.email}</p>
-                      </div>
-                    </div>
+                        <h5 className="card-title"> {user.coin_name} </h5>{" "}
+                        <p className="card-text"> {user.acronym} </p>{" "}
+                      </div>{" "}
+                    </div>{" "}
                   </div>
                 );
-              })}
-            </div>
-          </section>
+              })}{" "}
+            </div>{" "}
+          </section>{" "}
         </div>
       ) : (
         <div
@@ -225,9 +234,9 @@ function Home(props) {
               width: window.innerHeight / 5,
               top: 0,
             }}
-          ></div>
+          ></div>{" "}
         </div>
-      )}
+      )}{" "}
     </div>
   );
 }

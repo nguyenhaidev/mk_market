@@ -3,8 +3,8 @@ import productApi from "../../api/productApi";
 import NumberFormat from "react-number-format";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import axios from "axios";
 // import PropTypes from "prop-types";
 
 import style from "./style.module.scss";
@@ -14,6 +14,10 @@ function Detail(props) {
   const [loading, setLoading] = useState(false);
   // const [count, setCount] = useState(1);
   const [tab, setTab] = useState(0);
+  const [img, setImg] = useState("https://via.placeholder.com/150");
+
+  const [description, setDescription] = useState({});
+  const [information, setInformation] = useState({});
 
   const handleChange = (event, newValue) => {
     setTab(newValue);
@@ -52,11 +56,49 @@ function Detail(props) {
     }
   };
 
+  const getRamdomParagraph = async () => {
+    try {
+      const res = await axios.get(
+        "https://random-data-api.com/api/lorem_ipsum/random_lorem_ipsum"
+      );
+      setDescription(res.data);
+    } catch (error) {
+      //handle error
+    }
+  };
+
+  const getRamdomData = async () => {
+    try {
+      const res = await axios.get(
+        "https://random-data-api.com/api/code/random_code"
+      );
+      setInformation(res.data);
+    } catch (error) {
+      //handle error
+    }
+  };
+
+  const getRamdomImg = async () => {
+    try {
+      const res = await axios({
+        method: "get",
+        url: "https://random-data-api.com/api/crypto_coin/random_crypto_coin",
+      });
+      setImg(res.data.logo);
+    } catch (error) {
+      // //handle error
+      // setError(error);
+    }
+  };
+
   useEffect(() => {
+    getRamdomParagraph();
+    getRamdomData();
     const id = getIdFromParam();
     getProductDetail({
       id,
     });
+    getRamdomImg();
     return () => {
       setProduct([]);
     };
@@ -96,7 +138,43 @@ function Detail(props) {
     );
   };
 
-  const detail = <div className="">{product.description}</div>;
+  const detail = (
+    <div className="w-100">
+      <p>{product.description}</p>
+      {description.paragraphs
+        ? description.paragraphs.map((para, index) => <p key={index}>{para}</p>)
+        : null}
+      <p>{description.very_long_sentence}</p>
+      <p>{description.short_sentence}</p>
+    </div>
+  );
+
+  const renderRow = Object.keys(information).map((prop) => {
+    return (
+      <tr key={prop}>
+        <th scope="col">{prop}</th>
+        <td className="col">{information[prop]}</td>
+      </tr>
+    );
+  });
+
+  const info = (
+    <div className="w-100 text-center">
+      <div className="mt-2 h1" style={{ marginBottom: 30 }}>
+        Thông số kĩ thuật
+      </div>
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">{product.title}</th>
+          </tr>
+          {renderRow}
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  );
 
   return (
     <div
@@ -179,9 +257,13 @@ function Detail(props) {
                   />
                   ₫
                 </p>
-                <div className="d-flex border-top py-3 mt-2 align-items-center">
+                <div className="d-flex flex-column flex-md-row border-top py-3 mt-2 align-items-center">
                   <img
-                    src="https://picsum.photos/150/150"
+                    src={img}
+                    style={{
+                      height: 100,
+                      width: 100,
+                    }}
                     alt="logo"
                     className="h-100"
                   />
@@ -250,7 +332,7 @@ function Detail(props) {
                   </Tabs>
                 </Box>
                 {tabPanel(0, detail)}
-                {tabPanel(1)}
+                {tabPanel(1, info)}
                 {tabPanel(2)}
               </Box>
             </div>

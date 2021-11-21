@@ -14,11 +14,11 @@ function Item(props) {
       onClick={() => history.push(`/product?id=${props.data.id}`)}
     >
       <div className="col-4 text-center">
-        <img src={props.data.image} alt={props.data.title} />
-      </div>
+        <img src={props.data.image} alt={props.data.title} />{" "}
+      </div>{" "}
       <div className="col w-100 ps-3 row">
         <div className=" d-flex flex-column justify-content-center">
-          <p className={`${style.title}`}>{props.data.title}</p>
+          <p className={`${style.title}`}> {props.data.title} </p>{" "}
           <p className={``}>
             Giá:
             <NumberFormat
@@ -27,13 +27,11 @@ function Item(props) {
               thousandSeparator={true}
               className="mx-1"
             />
-            Đồng
-          </p>
-        </div>
-        <div className="d-flex">
-          <button className={`${style.btn}`}>Đặt hàng</button>
-        </div>
-      </div>
+            Đồng{" "}
+          </p>{" "}
+          <p>{props.data.description}</p>
+        </div>{" "}
+      </div>{" "}
     </div>
   ) : (
     <div
@@ -46,10 +44,10 @@ function Item(props) {
             className="w-100 item-img pt-2"
             src={props.data.image}
             alt={props.data.title}
-          />
-        </div>
+          />{" "}
+        </div>{" "}
         <div className="col-md-8 d-flex flex-column justify-content-center">
-          <p className="item-title ">{props.data.title}</p>
+          <p className="item-title "> {props.data.title} </p>{" "}
           <p className="item-price ">
             Giá:
             <NumberFormat
@@ -58,10 +56,10 @@ function Item(props) {
               thousandSeparator={true}
               className="mx-1"
             />
-            Đồng
-          </p>
-        </div>
-      </div>
+            Đồng{" "}
+          </p>{" "}
+        </div>{" "}
+      </div>{" "}
       <div className="py-2 w-100 item__btn-block  mx-0 py-1 px-2 row justify-content-around align-items-center">
         <div className="d-flex justify-content-around flex-column flex-md-row ">
           <div className="my-2 text-center text-md-start">
@@ -69,14 +67,14 @@ function Item(props) {
               href={`/product?id=${props.data.id}`}
               className=" item__btn-link"
             >
-              Xem chi tiết
-            </a>
-          </div>
+              Xem chi tiết{" "}
+            </a>{" "}
+          </div>{" "}
           {/* <div className="">
-            <button className="btn w-100 item__btn">Đặt hàng</button>
-          </div> */}
-        </div>
-      </div>
+                  <button className="btn w-100 item__btn">Đặt hàng</button>
+                </div> */}{" "}
+        </div>{" "}
+      </div>{" "}
     </div>
   );
 }
