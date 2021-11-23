@@ -147,7 +147,7 @@ function Home(props) {
               {" "}
               {hotItems.map((item, index) => {
                 return (
-                  <div key={index} className="col-6 col-lg-4 col-xl-3">
+                  <div key={index} className="col col-lg-4 col-xl-3">
                     <Item data={item} rowStyle={false} />{" "}
                   </div>
                 );
